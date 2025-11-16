@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="id">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Ajaib AI — Hybrid Pro (anjasmara)</title><link rel="icon" href="assets/logo.png"/><link rel="stylesheet" href="style.css"/><link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#06d6a0">
+</head>
+<body class="theme-dark">
+<div id="loader" class="loader-screen"><div class="loader-box"><div class="spinner"></div><div class="loader-text">Memuat aplikasi — Tunggu sebentar...</div></div></div>
+<header class="topbar"><div class="brand">Ajaib AI <span class="badge">PRO</span></div><div class="controls"><button id="themeToggle" class="icon-btn">🌓</button></div></header>
+<main class="wrap">
+<aside class="left card"><h3>Quote Inspiratif</h3><div id="quoteBox" class="quote">Memuat...</div><div style="margin-top:12px"><button class="btn" id="refreshQuote">Refresh Quote</button></div><hr/><h3>Hero</h3><div class="hero"><h2>Belajar, Berkembang, Berhasil</h2><p>AI mentor yang membantu menyusun langkah suksesmu — cepat & privat.</p></div></aside>
+<section class="center card"><div class="chat-header"><h2>Asisten AI</h2><button class="btn" id="playLast" title="Play last AI reply">🔊</button><div class="model-label" id="modelLabel">Auto</div></div><div id="aiMessages" class="chat-window"></div><div class="chat-input"><textarea id="prompt" placeholder="Tulis pesan..."></textarea><div class="controls"><select id="modelSelect"><option value="">Auto (llama3-70b)</option><option value="llama3-70b-8192">llama3-70b</option><option value="llama3-8b-8192">llama3-8b</option><option value="gpt-4o-mini">OpenAI gpt-4o-mini</option></select><button class="btn" id="sendBtn">Kirim</button></div></div></section>
+<aside class="right card"><h3>Featured Video</h3><div class="yt-controls"><input id="ytSearch" placeholder="Cari YouTube..." /><button class="btn" id="searchBtn">Search</button><button class="btn" id="randomBtn">Random</button></div><div class="yt-wrap"><iframe id="ytPlayer" src="" allowfullscreen></iframe></div><div class="social-row"><button class="btn" id="tiktokBtn">TikTok</button><button class="btn" id="instagramBtn">Instagram</button><button class="btn" id="facebookBtn">Facebook</button><button class="btn" id="gameBtn">Game Center</button></div></aside>
+
+<div class="search-card card">
+  <h3>Search Google</h3>
+  <div style="display:flex;gap:8px">
+    <input id="gSearch" placeholder="Search Google..." style="flex:1"/>
+    <button class="btn" id="gSearchBtn">Go</button>
+  </div>
+  <div id="gResults" style="margin-top:8px"></div>
+</div>
+
+</main>
+
+<!-- AI panel & mini player -->
+<div class="ai-panel" id="ai-panel">
+  <h3>AI Assistant (Quick)</h3>
+  <div class="conv" id="conversation"></div>
+  <form id="chatForm" onsubmit="return sendChat(event)">
+    <input id="chatMsg" placeholder="Tulis pesan..." style="width:70%" />
+    <select id="modeSel"><option value="local">Local</option><option value="api">API (Hybrid)</option></select>
+    <button type="submit">Kirim</button>
+  </form>
+</div>
+
+<div class="ai-panel">
+  <h3>Mini Player (YouTube / URL)</h3>
+  <input id="videoInput" placeholder="YouTube URL atau MP4" style="width:70%"/>
+  <button id="playVidBtn">Putar</button>
+  <div id="playerWrap" style="margin-top:8px;position:relative;padding-top:56.25%;background:#000;border-radius:6px;overflow:hidden"></div>
+</div>
+
+<div class="social-embeds card">
+  <h3>Social Embeds</h3>
+  <input id="embedUrl" placeholder="Paste IG / TikTok / FB URL" style="width:70%"/>
+  <button class="btn" id="embedBtn">Embed</button>
+  <div id="embedWrap" style="margin-top:8px"></div>
+  <small>Note: some platforms block embedding due to X-Frame-Options.</small>
+</div>
+
+
+<!-- Streaming & IG caption -->
+<hr/>
+<div style="padding:10px;border:1px solid #ddd;margin:10px;border-radius:8px">
+  <h3>AI Streaming (SSE demo)</h3>
+  <input id="streamPrompt" placeholder="Tulis prompt untuk streaming..." style="width:70%"/>
+  <button id="streamBtn">Start Stream</button>
+  <pre id="streamOut" style="background:#000;color:#0f0;padding:8px;height:160px;overflow:auto;border-radius:6px"></pre>
+</div>
+
+<div style="padding:10px;border:1px solid #ddd;margin:10px;border-radius:8px">
+  <h3>Instagram Caption Generator</h3>
+  <textarea id="igText" placeholder="Deskripsi / konteks foto..." style="width:70%;height:80px"></textarea><br/>
+  <select id="igTone"><option>inspiratif</option><option>humor</option><option>informal</option></select>
+  <button id="igBtn">Buat Caption</button>
+  <pre id="igOut" style="background:#fafafa;padding:8px;border-radius:6px"></pre>
+</div>
+
+<div style="padding:10px" class="card">
+  <h3>Game Center — Pilih Game</h3>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="btn game-select" data-file="/games/tictactoe.html">TicTacToe</button>
+    <button class="btn game-select" data-file="/games/snake.html">Snake</button>
+    <button class="btn game-select" data-file="/games/flappy.html">Flappy</button>
+    <button class="btn game-select" data-file="/games/tetris.html">Tetris</button>
+  </div>
+</div>
+
+
+<!-- Game modal -->
+<div id="gameModal" class="modal" style="display:none">
+  <div class="modal-content">
+    <button id="closeGame">Close</button>
+    <iframe id="iframeGame" src="" style="width:100%;height:520px;border:0;border-radius:8px"></iframe>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script src="chat-history.js"></script>
+<script src="tts.js"></script>
+
+</body></html>

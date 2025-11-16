@@ -1,0 +1,7 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tetris</title>
+<style>body{background:#021022;color:#fff;font-family:Arial}canvas{display:block;margin:20px auto;border:4px solid #023;background:#001122}</style>
+</head><body><h3 style="text-align:center">Tetris</h3><canvas id="c" width="200" height="400"></canvas><script>
+const c=document.getElementById('c'),ctx=c.getContext('2d');const cols=10,rows=20,sz=20;let grid=Array.from({length:rows},()=>Array(cols).fill(0));
+function draw(){ ctx.fillStyle='#001122'; ctx.fillRect(0,0,c.width,c.height); for(let r=0;r<rows;r++) for(let col=0;col<cols;col++){ if(grid[r][col]){ ctx.fillStyle='#06d6a0'; ctx.fillRect(col*sz,r*sz,sz-1,sz-1); } } }
+setInterval(draw,100);
+</script></body></html>

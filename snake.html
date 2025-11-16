@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Snake</title>
+<style>body{background:#021022;color:#fff;font-family:Arial}canvas{background:#001122;display:block;margin:20px auto;border:4px solid #023}</style>
+</head><body><h3 style="text-align:center">Snake</h3><canvas id="c" width="320" height="320"></canvas>
+<script>
+const cvs=document.getElementById('c');const ctx=cvs.getContext('2d');
+const size=16;let sx=8,sy=8,ax=4,ay=4,dx=0,dy=0,tail=[];function loop(){ sx+=dx; sy+=dy; if(sx<0||sx>=20||sy<0||sy>=20){ alert('Game Over'); reset(); return;} tail.push({x:sx,y:sy}); if(tail.length>10) tail.shift(); if(sx===ax&&sy===ay){ ax=Math.floor(Math.random()*20); ay=Math.floor(Math.random()*20); tail.push({}); } ctx.fillStyle='#001122'; ctx.fillRect(0,0,320,320); ctx.fillStyle='#06d6a0'; tail.forEach(t=>{ if(t&&t.x!==undefined) ctx.fillRect(t.x*16,t.y*16,16,16); }); ctx.fillStyle='#ff6b6b'; ctx.fillRect(ax*16,ay*16,16,16); }
+function reset(){ sx=8;sy=8;dx=0;dy=0;tail=[]; }
+document.addEventListener('keydown',e=>{ if(e.key==='ArrowUp'){dx=0;dy=-1;} if(e.key==='ArrowDown'){dx=0;dy=1;} if(e.key==='ArrowLeft'){dx=-1;dy=0;} if(e.key==='ArrowRight'){dx=1;dy=0;} });
+setInterval(loop,120);
+</script></body></html>
